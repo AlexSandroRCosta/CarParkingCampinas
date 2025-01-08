@@ -4,9 +4,8 @@ const cors = require("cors");
 const { MongoClient } = require("mongodb");
 
 const app = express();
-const port = 3000;
-const url =
-  "mongodb+srv://areckrodrigues1978:exSXYYzWsVMtqoMW@carparkingcluster.vx1k2.mongodb.net/?retryWrites=true&w=majority&appName=CarParkingCluster";
+const port = process.env.PORT || 3000;
+const url = process.env.MONGODB_URI;
 const dbName = "CarParkingCampinas";
 
 app.use(bodyParser.json());
