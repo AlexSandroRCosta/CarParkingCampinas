@@ -1,15 +1,27 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const cors = require("cors");
+const helmet = require("helmet");
 const { MongoClient } = require("mongodb");
 
 const app = express();
 const port = process.env.PORT || 3000;
-const url = process.env.MONGODB_URI;
+const url =
+  "mongodb+srv://areckrodrigues1978:exSXYYzWsVMtqoMW@carparkingcluster.vx1k2.mongodb.net/?retryWrites=true&w=majority&appName=CarParkingCluster";
 const dbName = "CarParkingCampinas";
 
 app.use(bodyParser.json());
-app.use(cors()); // Adicione esta linha para habilitar CORS
+app.use(cors());
+app.use(helmet());
+
+app.use(
+  helmet.contentSecurityPolicy({
+    directives: {
+      defaultSrc: ["'self'"],
+      scriptSrc: ["'self'", "'unsafe-inline'"],
+    },
+  })
+);
 
 app.post("/savePayment", async (req, res) => {
   console.log("POST /savePayment");
@@ -140,6 +152,31 @@ app.get("/getPayments", async (req, res) => {
     const collection = db.collection("TicketPago");
     const payments = await collection.find({}).toArray();
     console.log(payments);
+    res.status(200).json(payments);
+  } catch (err) {
+    console.error(err);
+    res.status(500).send("Erro ao obter pagamentos");
+  } finally {
+    await client.close();
+  }
+});
+
+app.get("/downloadPayments", async (req, res) => {
+  console.log("GET /downloadPayments");
+  const client = new MongoClient(url, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  });
+  try {
+    await client.connect();
+    const db = client.db(dbName);
+    const collection = db.collection("TicketPago");
+    const payments = await collection.find({}).toArray();
+    res.setHeader(
+      "Content-Disposition",
+      'attachment; filename="payments.json"'
+    );
+    res.setHeader("Content-Type", "application/json");
     res.status(200).json(payments);
   } catch (err) {
     console.error(err);
