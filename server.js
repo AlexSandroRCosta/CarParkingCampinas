@@ -19,6 +19,16 @@ app.use(
     directives: {
       defaultSrc: ["'self'"],
       scriptSrc: ["'self'", "'unsafe-inline'", "'unsafe-eval'"],
+      styleSrc: ["'self'", "'unsafe-inline'"],
+      imgSrc: ["'self'", "data:"],
+      connectSrc: ["'self'", "https://carparkingcluster.vx1k2.mongodb.net"],
+      fontSrc: [
+        "'self'",
+        "https://fonts.googleapis.com",
+        "https://fonts.gstatic.com",
+      ],
+      objectSrc: ["'none'"],
+      upgradeInsecureRequests: [],
     },
   })
 );
