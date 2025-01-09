@@ -1,8 +1,10 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap");
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: Calibri, sans-serif;
+  font-family: "Roboto", sans-serif;
 }
 html {
   scroll-behavior: smooth;
@@ -73,9 +75,9 @@ thead th {
 
 #nav {
   list-style: none;
-  background-color: #26a69a;
+  background-color: #0700c5;
   border-radius: 25px;
-  width: 450px;
+  width: 470px;
   display: grid;
   grid-template-columns: 1fr 1fr;
   height: 50px;
@@ -95,6 +97,7 @@ thead th {
   border: 1px solid white;
   border-radius: 25px;
   cursor: pointer;
+  white-space: nowrap;
 }
 
 .desativadoAba {
@@ -131,7 +134,7 @@ thead th {
   height: 374px;
   position: relative;
   color: black;
-  background-color: white;
+  background-color: rgba(255, 255, 255, 0.484);
   margin: auto;
   border-radius: 20px 20px 20px 20px;
 }
@@ -290,7 +293,7 @@ thead th {
 }
 
 .close-button:hover {
-  background-color: #ff4949;
+  background-color: #f80000;
   cursor: pointer;
   color: white;
   border-radius: 0 5px 0 0;
@@ -393,12 +396,12 @@ thead th {
 
 .input:valid,
 .input:focus {
-  border-bottom: 2px solid #26a69a;
+  border-bottom: 2px solid #1303f5;
 }
 
 .input:valid + .label,
 .input:focus + .label {
-  color: #26a69a;
+  color: #1303f5;
   font-size: 0.8rem;
   top: -30px;
 }
@@ -420,17 +423,17 @@ thead th {
 }
 
 .btnVerde {
-  background-color: #91cb82;
+  background-color: #0700c5;
 }
 
 .btnVerde:hover {
   background-color: white;
   color: black;
-  border: #91cb82 3px solid;
+  border: #000000 3px solid;
 }
 
 .btnAmarelo {
-  background-color: #26a69a;
+  background-color: #ba5d00;
   border: 0px;
 }
 
@@ -442,12 +445,12 @@ thead th {
 }
 
 .btnExcluir {
-  background: rgba(255, 0, 0, 0.6);
+  background: rgb(255, 0, 0);
 }
 
 .btnExcluir:hover {
   background-color: white;
-  border: 2px solid rgba(255, 0, 0, 0.6);
+  border: 2px solid rgb(255, 0, 0);
   color: black;
 }
 
@@ -467,4 +470,19 @@ thead th {
 [data-anime].animate {
   opacity: 1;
   transform: translate3d(0px, 0px, 0px);
+}
+
+.downloadReport {
+  float: right;
+  margin-right: 5%;
+  margin-bottom: 1%;
+}
+
+/* Responsividade para telas menores */
+@media (max-width: 768px) {
+  .downloadReport {
+    width: 100%;
+    margin-right: 0;
+    margin-bottom: 10px;
+  }
 }
