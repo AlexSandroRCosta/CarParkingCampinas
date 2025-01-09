@@ -547,6 +547,31 @@ document.addEventListener("DOMContentLoaded", () => {
   updateTableCustomersParagram();
 });
 
+document
+  .getElementById("downloadReport")
+  .addEventListener("click", async () => {
+    try {
+      const response = await fetch("http://localhost:3000/downloadPayments");
+      if (response.ok) {
+        const payments = await response.json();
+        const blob = new Blob([JSON.stringify(payments, null, 2)], {
+          type: "application/json",
+        });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement("a");
+        a.href = url;
+        a.download = "payments.json";
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+      } else {
+        console.error("Erro ao baixar o relatório");
+      }
+    } catch (err) {
+      console.error("Erro de rede:", err);
+    }
+  });
+
 document.querySelector("#salvarPreco").addEventListener("click", savePrice);
 
 document
